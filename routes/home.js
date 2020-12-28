@@ -1,7 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home */
+/* GET home 1 */
+router.get('/', function(req, res, next) {
+    fileName = "./resources/home.json";
+    res.sendFile(fileName)
+});
+
+/* GET home 2 */
+/*
 router.get('/', function(req, res, next) {
     status = HTTP_OK;
     fileName = "./resources/home.json";
@@ -10,6 +17,7 @@ router.get('/', function(req, res, next) {
         sendResponse(fileName, req, res, status);
     }, timeWaiting);
 });
+ */
 
 //constants
 //constants and variables definition
