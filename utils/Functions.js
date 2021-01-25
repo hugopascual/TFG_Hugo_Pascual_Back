@@ -23,8 +23,6 @@ function sendResponse(fileName, req, res, status) {
             }
         });
     } else {
-        console.log("File Not Found");
-        /*
         fs.readFile("error.json", 'utf8', function (err, data) {
             if (err) {
                 console.log(err);
@@ -34,7 +32,6 @@ function sendResponse(fileName, req, res, status) {
                 res.status(status).json(obj);
             }
         });
-         */
     }
 }
 
