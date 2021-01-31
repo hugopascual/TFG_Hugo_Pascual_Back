@@ -1,33 +1,42 @@
-const {DataTypes, Model} = require('sequelize');
-const sequelize = require('./sequelize');
-
-class User extends Model {
-
-}
-
-User.init( {
-        userID: {
-            type: DataTypes.INTEGER,
-            unique: "userIDUniqueValue",
-            validate: {notEmpty: {msg: "userID must not be empty."}}
-        },
-        email: {
-            type: DataTypes.STRING,
-            unique: true,
-            validate: {notEmpty: {msg: "Username must not be empty."}}
-        },
-        username: {
-            type: DataTypes.STRING,
-            unique: true,
-            validate: {notEmpty: {msg: "Username must not be empty."}}
-        },
-        password: {
-            type: DataTypes.STRING,
-            validate: {notEmpty: {msg: "Password must not be empty."}}
-        },
-        isAdmin: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
-        }
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
     }
-    ,sequelize)
+  };
+
+  User.init({
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      validate: {notEmpty: {msg: "Email must not be empty."}}
+    },
+    username: {
+      type: DataTypes.STRING,
+      unique: true,
+      validate: {notEmpty: {msg: "Username must not be empty."}}
+    },
+    password: {
+      type: DataTypes.STRING,
+      validate: {notEmpty: {msg: "Password must not be empty."}}
+    },
+    token: {
+      type: DataTypes.STRING,
+      validate: {notEmpty: {msg: "Token must not be empty."}}
+    }
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+
+  return User;
+};
