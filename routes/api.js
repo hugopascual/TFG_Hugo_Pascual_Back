@@ -14,11 +14,6 @@ router.all('*', function(req, res, next) {
 
 //-----------------------------------------------------------
 
-// Autoload the objects associated to the given route parameter.
-router.param('userId', userApi.load);
-
-//-----------------------------------------------------------
-
 // Routes for the users resource.
 
 router.get('/users',

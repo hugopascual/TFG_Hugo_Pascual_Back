@@ -19,6 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Empty route
+app.get('/', function(req, res, next) {
+  res.render('index', { title: 'TFG_Hugo_Pascual_Back' });
+});
+
 //Routes mounted at '/api'
 app.use('/api', apiRouter);
 
