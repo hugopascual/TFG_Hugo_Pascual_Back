@@ -12,6 +12,7 @@ const config = require ('../config/config.json')[process.env.NODE_ENV || "develo
 const url = process.env.DATABASE_URL || "sqlite:quiz.sqlite";
 
 // const sequelize = new Sequelize(url);
+
 // const sequelize = new Sequelize('dd0bo2j4bc3sva', "spfbjvzquhwuus", '623d66f7f015139e151286562ea6af53424c76710b97fc50a479afbf1aa7acf1', {
 //     host: 'ec2-52-72-190-41.compute-1.amazonaws.com',
 //     port: '5432',
@@ -21,6 +22,15 @@ const url = process.env.DATABASE_URL || "sqlite:quiz.sqlite";
 //     }
 // });
 
-const sequelize = new Sequelize({ ...config});
+const sequelize = new Sequelize(config.database, config.username, config.password, {
+    host: config.host,
+    port: config.port,
+    dialect: config.dialect,
+    dialectOptions: {
+        ssl: true
+    }
+});
+
+// const sequelize = new Sequelize({ ...config});
 
 module.exports = sequelize;

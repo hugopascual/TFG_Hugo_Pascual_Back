@@ -16,7 +16,10 @@
     "database": "dd0bo2j4bc3sva",
     "host": "ec2-52-72-190-41.compute-1.amazonaws.com",
     "port": "5432",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": true
+    }
   },
   "production": {
     "username": "spfbjvzquhwuus",
@@ -24,6 +27,9 @@
     "database": "dd0bo2j4bc3sva",
     "host": "ec2-52-72-190-41.compute-1.amazonaws.com",
     "port": "5432",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": true
+    }
   }
 }
