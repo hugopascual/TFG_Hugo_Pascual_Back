@@ -9,7 +9,7 @@ exports.index = async (req, res, next) => {
 
     try {
         const users = await models.User.findAll({
-            attributes: ['id', 'email', 'username', 'password', 'token', 'createAt', 'updatedAt']
+            attributes: ['id', 'email', 'username', 'password', 'token', 'createdAt', 'updatedAt']
         });
         res.json(users);
     } catch (error) {
