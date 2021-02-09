@@ -10,6 +10,7 @@ router.all('*', function(req, res, next) {
 
     console.log("=== API ===>", req.url);
     console.log(req.body)
+    console.log(req.params)
     next();
 });
 
