@@ -1,6 +1,6 @@
 
 const {models} = require('../models');
-const Sequelize = require('sequelize');
+//const Sequelize = require('sequelize');
 
 //-----------------------------------------------------------
 
@@ -9,7 +9,7 @@ exports.index = async (req, res, next) => {
 
     try {
         const users = await models.User.findAll({
-            attributes: ['id', 'email', 'username']
+            attributes: ['id', 'email', 'username', 'password', 'token', 'createAt', 'updatedAt']
         });
         res.json(users);
     } catch (error) {
