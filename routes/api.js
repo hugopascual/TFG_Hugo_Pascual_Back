@@ -9,6 +9,7 @@ const userApi = require('../api/user');
 router.all('*', function(req, res, next) {
 
     console.log("=== API ===>", req.url);
+    console.log(req.body)
     next();
 });
 
@@ -16,8 +17,8 @@ router.all('*', function(req, res, next) {
 
 // Routes for the users resource.
 
-router.get('/users',
-    userApi.index);
+router.get('/users', userApi.index);
+router.post('/users/create', userApi.create);
 
 //-----------------------------------------------------------
 
@@ -32,7 +33,7 @@ router.all('*', function(req, res, next) {
 //-----------------------------------------------------------
 
 // Error
-router.use(function(err, req, res, next) {
+router.use(function(err, req, res) {
 
     var emsg = err.message || "Error Interno";
 

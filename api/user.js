@@ -18,3 +18,35 @@ exports.index = async (req, res, next) => {
 };
 
 //-----------------------------------------------------------
+
+// POST /users/create
+exports.create = async (req, res) => {
+
+    const {email, username, password} = req.body;
+
+    let user = models.User.build({
+        email,
+        username,
+        password
+    });
+
+    // Password must not be empty.
+    if (!password) {
+        return res.send('Empty password')
+    }
+
+    try {
+        // Create the token field:
+        //user.token = authentication.createToken();
+        user.token = "token de prueba"
+
+        // Save into the data base
+        user.save({fields: ["email", "username", "password", "token"]});
+        res.send("User created")
+
+    } catch (error) {
+        res.send(error.message)
+    }
+};
+
+//-----------------------------------------------------------
