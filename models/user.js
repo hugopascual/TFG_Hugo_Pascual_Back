@@ -1,8 +1,11 @@
 'use strict';
 
 const {Model} = require('sequelize');
+const crypt = require('../helpers/crypt');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -10,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+    }
+
+    verifyPassword(password) {
+      return crypt.encryptPassword(password, this.salt) === this.password;
     }
   };
 
@@ -26,11 +33,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
-      validate: {notEmpty: {msg: "Password must not be empty."}}
+      validate: {notEmpty: {msg: "Password must not be empty."}},
+      set(password) {
+        // Random String used as salt.
+        this.salt = Math.round((new Date().valueOf() * Math.random())) + '';
+        this.setDataValue('password', crypt.encryptPassword(password, this.salt));
+      }
     },
     token: {
       type: DataTypes.STRING,
       validate: {notEmpty: {msg: "Token must not be empty."}}
+    },
+    salt: {
+      type: DataTypes.STRING
     }
   }, {
     sequelize,

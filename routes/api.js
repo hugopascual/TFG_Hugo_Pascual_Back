@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const userApi = require('../api/user');
+const sessionApi = require('../api/session');
 
 //-----------------------------------------------------------
 
@@ -13,13 +14,27 @@ router.all('*', function(req, res, next) {
     console.log(req.params)
     next();
 });
+//-----------------------------------------------------------
+
+// Routes to manage session.
+
+// logout check
+router.get('/login',sessionApi.checkLoginExpires);
+
+// create login session
+router.post('/login',
+    sessionApi.create,
+    sessionApi.createLoginExpires);
+
+// logout
+router.delete('/login', sessionApi.destroy);
 
 //-----------------------------------------------------------
 
 // Routes for the users resource.
 
 router.get('/users', userApi.index);
-router.post('/users/create', userApi.create);
+router.post('/users/registration', userApi.create);
 
 //-----------------------------------------------------------
 

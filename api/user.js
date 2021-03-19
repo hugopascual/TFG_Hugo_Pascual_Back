@@ -1,6 +1,7 @@
-
 const {models} = require('../models');
 //const Sequelize = require('sequelize');
+
+const authentication = require('../helpers/authentication');
 
 //-----------------------------------------------------------
 
@@ -9,7 +10,7 @@ exports.index = async (req, res, next) => {
 
     try {
         const users = await models.User.findAll({
-            attributes: ['id', 'email', 'username']
+            attributes: ['id', 'email', 'username', 'password', 'token', 'salt']
         });
         res.json(users);
     } catch (error) {
@@ -38,10 +39,10 @@ exports.create = async (req, res) => {
     try {
         // Create the token field:
         //user.token = authentication.createToken();
-        user.token = "token de prueba"
+        user.token = authentication.createToken();
 
         // Save into the data base
-        user.save({fields: ["email", "username", "password", "token"]});
+        user = await user.save({fields: ["email", "username", "password", "token"]});
         res.send("User created")
 
     } catch (error) {
