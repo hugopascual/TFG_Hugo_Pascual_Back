@@ -4,7 +4,9 @@
   "description": "Server that provides info to my TFG app",
   "scripts": {
     "start": "NODE_ENV=development node bin/www",
-    "migrate": "NODE_TLS_REJECT_UNAUTHORIZED=0 sequelize-cli db:migrate"
+    "migrate": "NODE_TLS_REJECT_UNAUTHORIZED=0 sequelize-cli db:migrate",
+    "clean_data": "heroku pg:reset --confirm tfg-hugo-pascual-back",
+    "reset_data": "heroku pg:reset --confirm tfg-hugo-pascual-back && NODE_TLS_REJECT_UNAUTHORIZED=0 sequelize-cli db:migrate"
   },
   "author": "hugo pascual",
   "engines": {

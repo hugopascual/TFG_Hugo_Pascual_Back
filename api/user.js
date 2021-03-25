@@ -38,13 +38,12 @@ exports.create = async (req, res) => {
 
     try {
         // Create the token field:
-        //user.token = authentication.createToken();
         user.token = authentication.createToken();
 
         // Save into the data base
-        user = await user.save({fields: ["email", "username", "password", "token"]});
-        res.send("User created")
+        user = await user.save({fields: ["email", "username", "password", "token","salt"]});
 
+        res.send(200)
     } catch (error) {
         res.send(error.message)
     }

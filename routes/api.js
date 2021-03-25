@@ -12,6 +12,7 @@ router.all('*', function(req, res, next) {
     console.log("=== API ===>", req.url);
     console.log(req.body)
     console.log(req.params)
+    console.log(req.method)
     next();
 });
 //-----------------------------------------------------------
@@ -23,12 +24,11 @@ router.get('/login',sessionApi.checkLoginExpires);
 
 // create login session
 router.post('/login',
-    sessionApi.create,
-    sessionApi.createLoginExpires);
+            sessionApi.create,
+            sessionApi.createLoginExpires);
 
 // logout
 router.delete('/login', sessionApi.destroy);
-
 //-----------------------------------------------------------
 
 // Routes for the users resource.

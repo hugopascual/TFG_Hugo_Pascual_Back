@@ -25,23 +25,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Configuracion de la session para almacenarla en BBDD usando Sequelize.
-var sequelize = require("./models");
+var sequelize = require('./models');
 var sessionStore = new SequelizeStore({
   db: sequelize,
-  table: "Session",
+  table: 'Session',
   checkExpirationInterval: 15 * 60 * 1000, // The interval at which to cleanup expired sessions in milliseconds. (15 minutes)
   expiration: 4 * 60 * 60 * 1000  // The maximum age (in milliseconds) of a valid session. (4 hours)
 });
 app.use(session({
-  secret: "TFG Hugo Pascual",
+  secret: 'TFG Hugo Pascual',
   store: sessionStore,
   resave: false,
   saveUninitialized: true
 }));
 
-app.use(passport.initialize( {
-  userProperty: 'loginUser' // defaults to 'user' if omitted
-}));
+app.use(passport.initialize());
 app.use(passport.session());
 
 
