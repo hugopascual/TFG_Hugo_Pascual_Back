@@ -28,7 +28,7 @@ router.post('/login',
             sessionApi.createLoginExpires);
 
 // logout
-router.delete('/login', sessionApi.destroy);
+router.delete('/logout', sessionApi.destroy);
 //-----------------------------------------------------------
 
 // Routes for the users resource.

@@ -30,23 +30,22 @@ passport.use(new LocalStrategy( {
     }
 ));
 
-
 /*
  * Serialize user to be saved into req.session.passport.
  * It only saves the id of the user.
  */
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user.token);
 });
-
 
 /*
  * Deserialize req.session.passport to create the user.
  * Find the user with the serialized id.
  */
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (token, done) => {
     try {
-        const user = await models.User.findByPk(id);
+        // const user = await models.User.findByPk(id);
+        const user = await models.User.findOne({ where: {token} });
         done(null, user);
     } catch (error) {
         done(error);
@@ -68,10 +67,10 @@ exports.create = function(req, res, next) {
 // If the logged user does not make any new request during this time,
 // then the user's session will be closed.
 // The value is in milliseconds.
-// 10 seconds
-const maxIdleTime = (10*1000);
-// 1 day.
-//const maxIdleTime = 24*60*(60*1000);
+// 1 second
+// const maxIdleTime = (1000);
+// 15 min.
+const maxIdleTime = 15*(60*1000);
 
 // Middleware to create req.session.loginExpires, which is the current inactivity time
 // for the user session.
@@ -79,8 +78,11 @@ exports.createLoginExpires = (req, res, next) => {
     date = Date.now()
     req.session.loginExpires =  date + maxIdleTime;
 
+    console.log(date)
+    console.log(date + maxIdleTime)
+
     res.send({
-        id: req.user.id,
+        id: req.user.id.toString(),
         email: req.user.email,
         username: req.user.username,
         token: req.user.token
@@ -98,21 +100,22 @@ exports.checkLoginExpires = (req, res, next) => {
             delete req.session.loginExpires;
             req.logout(); // Passport logout;
 
-            res.sendStatus(401)
+            res.status(401).send('Expired session')
 
         } else { // Not expired. Reset value.
             req.session.loginExpires = Date.now() + maxIdleTime;
 
             res.sendStatus(200)
         }
+    } else {
+        res.status(401).send('No user session')
     }
-    // Continue with the request
-    next();
+
 };
 
 // DELETE /login   --  Close the session
 exports.destroy = (req, res, next) => {
-
     delete req.session.loginExpires;
     req.logout();  // Passport logout
+    res.sendStatus(200)
 };
