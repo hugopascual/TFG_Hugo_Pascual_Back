@@ -3,6 +3,7 @@ const router = express.Router();
 
 const userApi = require('../api/user');
 const sessionApi = require('../api/session');
+const productApi = require('../api/product');
 
 //-----------------------------------------------------------
 
@@ -33,8 +34,17 @@ router.delete('/logout', sessionApi.destroy);
 
 // Routes for the users resource.
 
-router.get('/users', userApi.index);
+router.get('/users', userApi.getAll);
 router.post('/users/registration', userApi.create);
+
+//-----------------------------------------------------------
+
+// Routes for the products resource.
+
+router.get('/products/getAll', productApi.getAll);
+router.get('/products/getList/:category', productApi.getList);
+router.get('/products/getDetail/:id', productApi.getDetail);
+router.post('/products/add', productApi.add);
 
 //-----------------------------------------------------------
 

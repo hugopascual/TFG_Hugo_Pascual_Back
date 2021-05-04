@@ -5,8 +5,8 @@
   "scripts": {
     "start": "NODE_ENV=development node bin/www",
     "migrate": "NODE_TLS_REJECT_UNAUTHORIZED=0 sequelize-cli db:migrate",
-    "clean_data": "heroku pg:reset --confirm tfg-hugo-pascual-back",
-    "reset_data": "heroku pg:reset --confirm tfg-hugo-pascual-back && NODE_TLS_REJECT_UNAUTHORIZED=0 sequelize-cli db:migrate"
+    "clean_database": "heroku pg:reset --confirm tfg-hugo-pascual-back",
+    "reset_database": "heroku pg:reset --confirm tfg-hugo-pascual-back && NODE_TLS_REJECT_UNAUTHORIZED=0 sequelize-cli db:migrate && NODE_TLS_REJECT_UNAUTHORIZED=0 sequelize-cli db:seed:all"
   },
   "author": "hugo pascual",
   "engines": {
