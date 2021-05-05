@@ -19,7 +19,7 @@ exports.add = async (req, res, next) => {
 
     try {
         await product.save({fields: ["category","model","price","description","image","owner","status"]});
-        res.status(200)
+        res.send(200)
     } catch (error) {
         next(error)
     }
@@ -67,7 +67,7 @@ exports.getDetail = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
     try {
         await models.Product.destroy({where : {id: req.params.id}, force: true});
-        res.status(200);
+        res.send(200);
     } catch (error) {
         next(error)
     }
