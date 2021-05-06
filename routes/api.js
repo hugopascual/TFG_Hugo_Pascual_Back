@@ -42,8 +42,8 @@ router.post('/users/registration', userApi.create);
 // Routes for the products resource.
 
 router.get('/products/getAll', productApi.getAll);
-router.get('/products/getList/:category', productApi.getList);
-router.get('/products/getDetail/:id', productApi.getDetail);
+router.get('/products/getList', productApi.getList);
+router.get('/products/getDetail', productApi.getDetail);
 router.post('/products/add', productApi.add);
 
 //-----------------------------------------------------------
