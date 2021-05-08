@@ -44,7 +44,8 @@ exports.getAll = async (req, res, next) => {
 // GET /api/products/getList/:category
 exports.getList = async (req, res, next) => {
     try {
-        const products = await models.Product.findAll({where : {category: req.query.category, status: 'ONSALE'}});
+        const products = await models.Product.findAll({attributes: ['id', 'model', 'price', 'image'],
+            where : {category: req.query.category, status: 'ONSALE'}});
         res.json(products);
     } catch (error) {
         next(error)
