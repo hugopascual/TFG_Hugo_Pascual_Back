@@ -45,6 +45,7 @@ router.get('/products/getAll', productApi.getAll);
 router.get('/products/getList', productApi.getList);
 router.get('/products/getDetail', productApi.getDetail);
 router.post('/products/add', productApi.add);
+router.delete('/products/delete', productApi.delete)
 
 //-----------------------------------------------------------
 
