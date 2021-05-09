@@ -54,6 +54,19 @@ exports.getList = async (req, res, next) => {
 
 //-----------------------------------------------------------
 
+// GET /api/products/getUserLists/:username
+exports.getUsersList = async (req, res, next) => {
+    try {
+        const products = await models.Product.findAll({attributes: ['id', 'model', 'price', 'image'],
+            where : {owner: req.query.username}});
+        res.json(products);
+    } catch (error) {
+        next(error)
+    }
+};
+
+//-----------------------------------------------------------
+
 // GET /api/products/getDetail/:id
 exports.getDetail = async (req, res, next) => {
     try {

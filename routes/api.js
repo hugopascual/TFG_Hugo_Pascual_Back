@@ -43,6 +43,7 @@ router.post('/users/registration', userApi.create);
 
 router.get('/products/getAll', productApi.getAll);
 router.get('/products/getList', productApi.getList);
+router.get('/products/getUserLists', productApi.getUsersList)
 router.get('/products/getDetail', productApi.getDetail);
 router.post('/products/add', productApi.add);
 router.delete('/products/delete', productApi.delete)
