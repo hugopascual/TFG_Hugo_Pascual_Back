@@ -54,11 +54,11 @@ exports.getList = async (req, res, next) => {
 
 //-----------------------------------------------------------
 
-// GET /api/products/getUserLists/:username
+// GET /api/products/getUserLists/:email
 exports.getUsersList = async (req, res, next) => {
     try {
         const products = await models.Product.findAll({attributes: ['id', 'model', 'price', 'image'],
-            where : {owner: req.query.username}});
+            where : {owner: req.query.email}});
         res.json(products);
     } catch (error) {
         next(error)

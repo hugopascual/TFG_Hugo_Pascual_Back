@@ -16,11 +16,20 @@ module.exports = {
     */
 
     await queryInterface.bulkInsert('Users', [{
-      email: 'hugoemail',
+      email: 'h@email.com',
       username: 'hugo',
       password: crypt.encryptPassword('1234', 'aaaa'),
       token: authentication.createToken(),
       salt: 'aaaa',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      email: 'a@email.com',
+      username: 'ana',
+      password: crypt.encryptPassword('1234', 'bbbb'),
+      token: authentication.createToken(),
+      salt: 'bbbb',
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
